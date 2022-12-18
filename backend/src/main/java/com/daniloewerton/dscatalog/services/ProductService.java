@@ -55,7 +55,6 @@ public class ProductService {
         try {
             Product entity = repository.getOne(id);
             codyDtoToEntity(dto, entity);
-            //entity.setName(dto.getName());
             entity = repository.save(entity);
             return new ProductDTO(entity);
         } catch (EntityNotFoundException e) {
