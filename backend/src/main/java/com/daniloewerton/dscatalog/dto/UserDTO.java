@@ -2,14 +2,18 @@ package com.daniloewerton.dscatalog.dto;
 
 import com.daniloewerton.dscatalog.entities.User;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
 public class UserDTO {
 
     private Long id;
+    @NotBlank(message = "Campo obrigatório")
     private String firstName;
     private String lastName;
+    @Email(message = "Favor entrar um e-mmail válido")
     private String email;
     private String password;
 
