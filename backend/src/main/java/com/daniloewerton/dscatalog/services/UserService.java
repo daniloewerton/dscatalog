@@ -3,6 +3,7 @@ package com.daniloewerton.dscatalog.services;
 import com.daniloewerton.dscatalog.dto.RoleDTO;
 import com.daniloewerton.dscatalog.dto.UserDTO;
 import com.daniloewerton.dscatalog.dto.UserInsertDTO;
+import com.daniloewerton.dscatalog.dto.UserUpdateDTO;
 import com.daniloewerton.dscatalog.entities.Role;
 import com.daniloewerton.dscatalog.entities.User;
 import com.daniloewerton.dscatalog.repositories.RoleRepository;
@@ -54,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User entity = repository.getOne(id);
             codyDtoToEntity(dto, entity);
