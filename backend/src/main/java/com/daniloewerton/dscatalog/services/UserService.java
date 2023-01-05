@@ -10,11 +10,16 @@ import com.daniloewerton.dscatalog.repositories.RoleRepository;
 import com.daniloewerton.dscatalog.repositories.UserRepository;
 import com.daniloewerton.dscatalog.services.exceptions.DatabaseException;
 import com.daniloewerton.dscatalog.services.exceptions.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,8 +28,9 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
@@ -87,5 +93,17 @@ public class UserService {
             Role role = roleRepository.getOne(roleDto.getId());
             entity.getRoles().add(role);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = repository.findByEmail(username);
+        if (user == null) {
+            LOGGER.error("User not found" + username);
+            throw new UsernameNotFoundException("Email not found");
+        }
+        LOGGER.info("User found: " + username);
+        return user;
     }
 }
