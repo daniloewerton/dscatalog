@@ -1,4 +1,4 @@
-package com.daniloewerton.dscatalog;
+package com.daniloewerton.dscatalog.config;
 
 import com.daniloewerton.dscatalog.components.JtwTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
