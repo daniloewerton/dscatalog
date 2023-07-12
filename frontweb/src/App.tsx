@@ -1,10 +1,15 @@
 import './assets/styles/custom.scss';
 import './App.css';
+import Navbar from './components/Navbar';
+import React from 'react';
 
-function App() {
+const App = () => {
   return (
-    <h1>Hello World</h1>
+    <>
+      <Navbar />
+      <h1>Hello World</h1>
+    </>
   );
-}
+};
 
 export default App;
