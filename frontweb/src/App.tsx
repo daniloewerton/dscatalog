@@ -1,11 +1,11 @@
 import './assets/styles/custom.scss';
 import './App.css';
 import React from 'react';
-import Home from './pages/Home';
+import Routes from 'Routes';
 
-const App = () => {
+function App() {
   return (
-    <Home />
+    <Routes />
   );
 };
 
